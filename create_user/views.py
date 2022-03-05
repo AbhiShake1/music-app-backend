@@ -18,11 +18,7 @@ def create_user(request: HttpRequest) -> Optional[HttpResponse]:
             username = post_data['username']
             email = post_data['email']
             password = post_data['password']
-            first_name = post_data.get('first_name')
-            last_name = post_data.get('last_name')
             user: User = User.objects.create_user(username=username, email=email, password=password)
-            user.first_name = first_name
-            user.last_name = last_name
             user.save()
             return get_user_detail_response(user)
         except Exception:
