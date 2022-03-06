@@ -11,7 +11,7 @@ def recover_password(request: HttpRequest) -> HttpResponse:
             import json
             post_data: dict = json.loads(request.body.decode())
             email: str = post_data['email']
-            new_password: str = post_data['password']
+            new_password: str = post_data['new_password']
             user: User = User.objects.get(email=email)
             user.set_password(new_password)
             user.save()
