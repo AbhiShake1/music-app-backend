@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'musicapp.apps.MusicappConfig',
     'create_user',
     'signin',
+    'forgot_password',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'djangoProject')
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
