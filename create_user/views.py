@@ -11,6 +11,10 @@ from core.user_detail_response import get_user_detail_response
 
 @csrf_exempt
 def create_user(request: HttpRequest) -> Optional[HttpResponse]:
+    def data_or_empty(data) -> str:
+        if data is None:
+            return ''
+
     if request.method == 'POST':
         import json
         post_data: dict = json.loads(request.body.decode())
@@ -21,8 +25,8 @@ def create_user(request: HttpRequest) -> Optional[HttpResponse]:
             first_name = post_data.get('firstName')
             last_name = post_data.get('lastName')
             user: User = User.objects.create_user(username=username, email=email, password=password)
-            user.first_name = first_name
-            user.last_name = last_name
+            user.first_name = data_or_empty(first_name)
+            user.last_name = data_or_empty(last_name)
             user.save()
             return get_user_detail_response(user)
         except Exception:
