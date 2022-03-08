@@ -12,4 +12,8 @@ def get_user_detail_response(user: User) -> HttpResponse:
         'dateJoined': str(user.date_joined),
         'isActive': user.is_active,
     }
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), headers={
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": True,
+        
+    })
