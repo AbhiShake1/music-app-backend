@@ -15,5 +15,4 @@ def get_user_detail_response(user: User) -> HttpResponse:
     return HttpResponse(json.dumps(data), headers={
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": True,
-        
     })

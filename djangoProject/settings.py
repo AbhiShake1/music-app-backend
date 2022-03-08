@@ -86,21 +86,6 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.signin.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.signin.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.signin.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.signin.password_validation.NumericPasswordValidator',
-    },
-]
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -124,3 +109,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'djangoProject')
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+AUTH_PWD_MODULE="django.contrib.auth.password_validation."
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": f"{AUTH_PWD_MODULE}UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": f"{AUTH_PWD_MODULE}MinimumLengthValidator",
+    },
+    {
+        "NAME": f"{AUTH_PWD_MODULE}CommonPasswordValidator",
+    },
+    {
+        "NAME": f"{AUTH_PWD_MODULE}NumericPasswordValidator",
+    },
+]
