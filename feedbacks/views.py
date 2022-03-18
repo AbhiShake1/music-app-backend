@@ -1,27 +1,42 @@
+import pusher
 from django.http import HttpRequest, HttpResponse
-from .models import Post
-from .forms import FeedbackForm
-from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+
+pusher_client = pusher.Pusher(
+    app_id='1363891',
+    key='6c72a292bcf1d2ca2eb6',
+    secret='079a81394ef64fb65c14',
+    cluster='ap2',
+    ssl=True
+)
 
 
 # Create your views here.
+@csrf_exempt
+def post_detail(request: HttpRequest) -> HttpResponse:
+    from messages_repo import MessagesRepo
 
-def post_detail(request: HttpRequest, slug) -> HttpResponse:
-    post = get_object_or_404(Post, slug=slug)
-    comments = post.comments
-    new_comment = None
-    # Comment posted
+    repo = MessagesRepo()
+
     if request.method == 'POST':
-        feedback_form = FeedbackForm(data=request.POST)
-        if feedback_form.is_valid():
-            # Create Comment object but don't save to database yet
-            new_comment = feedback_form.save(commit=False)
-            new_comment.post = post
-            new_comment.save()
-    else:
-        feedback_form = FeedbackForm()
-
-    return HttpResponse({'post': post,
-                         'comments': comments,
-                         'new_comment': new_comment,
-                         'comment_form': feedback_form})
+        import json
+        post_data: dict = json.loads(request.body.decode())
+        post_id = post_data['post_id']
+        comment = post_data['comment']
+        username = post_data['username']
+        message = repo.create(post_id, username, comment)
+        pusher_client.trigger(post_id, 'feedback', message)
+        data = {'post_id': post_id,
+                'comment': comment,
+                }
+        return HttpResponse(json.dumps(data), headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": True,
+        })
+    if request.method == 'GET':
+        import json
+        messages = repo.get_all()
+        return HttpResponse(json.dumps(messages), headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": True,
+        })
