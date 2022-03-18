@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'create_user',
     'signin',
     'forgot_password',
+    'feedbacks',
+    'signout',
 ]
 
 MIDDLEWARE = [

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.http import HttpRequest, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 from core.user_detail_response import get_user_detail_response
 
@@ -19,5 +20,6 @@ def signin(request: HttpRequest) -> Optional[HttpResponse]:
         if user is None:
             return HttpResponse(content='Invalid credentials', status=401)
         user.save()
+        auth.login(request, user)
         return get_user_detail_response(user)
     return HttpResponse(status=401)
