@@ -27,7 +27,7 @@ def get_music(request: HttpRequest) -> HttpResponse:
 
 @csrf_exempt
 def delete_music(request: HttpRequest) -> HttpResponse:
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         import json
         post_data: dict = json.loads(request.body.decode())
         file_name = os.path.join(settings.MUSIC_ROOT, post_data['file_name'])
