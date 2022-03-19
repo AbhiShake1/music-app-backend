@@ -30,7 +30,7 @@ def delete_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         import json
         post_data: dict = json.loads(request.body.decode())
-        file_name = post_data['file_name']
+        file_name = os.path.join(settings.MUSIC_ROOT, post_data['file_name'])
         if os.path.exists(file_name):
             os.remove(file_name)
         files = os.listdir(settings.MUSIC_ROOT)
