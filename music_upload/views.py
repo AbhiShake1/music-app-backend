@@ -23,3 +23,16 @@ def get_music(request: HttpRequest) -> HttpResponse:
     files = os.listdir(settings.MUSIC_ROOT)
     import json
     return HttpResponse(json.dumps(files))
+
+
+@csrf_exempt
+def delete_music(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        import json
+        post_data: dict = json.loads(request.body.decode())
+        file_name = post_data['file_name']
+        if os.path.exists(file_name):
+            os.remove(file_name)
+        files = os.listdir(settings.MUSIC_ROOT)
+        return HttpResponse(json.dumps(files))
+    return HttpResponse(status=401)

@@ -7,7 +7,8 @@ from . import views
 
 urlpatterns = [
     path('', views.upload_music),
-    path('get/', views.get_music)
+    path('get/', views.get_music),
+    path('delete/', views.delete_music),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
