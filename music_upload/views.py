@@ -21,4 +21,5 @@ def upload_music(request: HttpRequest) -> HttpResponse:
 @csrf_exempt
 def get_music(request: HttpRequest) -> HttpResponse:
     files = os.listdir(settings.MUSIC_ROOT)
-    return HttpResponse(files)
+    import json
+    return HttpResponse(json.dumps(files))
