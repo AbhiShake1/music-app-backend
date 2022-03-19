@@ -9,4 +9,5 @@ urlpatterns = [
     path('api=forgot_password/', include('forgot_password.urls')),
     path('api=signout/', include('signout.urls')),
     path('api=feedback/', include('feedbacks.urls')),
+    path('api=music_upload/', include('music_upload.urls')),
 ]

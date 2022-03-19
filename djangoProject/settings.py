@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'forgot_password',
     'feedbacks',
     'signout',
+    'music_upload',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +113,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'djangoProject')
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
-AUTH_PWD_MODULE="django.contrib.auth.password_validation."
+AUTH_PWD_MODULE = "django.contrib.auth.password_validation."
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -128,3 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": f"{AUTH_PWD_MODULE}NumericPasswordValidator",
     },
 ]
+
+MUSIC_URL = '/music/'
+MUSIC_ROOT = os.path.join(BASE_DIR, 'music')
