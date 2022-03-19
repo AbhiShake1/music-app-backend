@@ -18,8 +18,8 @@ class MessagesRepo:
             cursor = db.cursor()
             cursor.execute('''
                             create table if not exists messages
-                            (id INTEGER PRIMARY KEY, name TEXT, 
-                            text TEXT, time INTEGER)
+                            (id INTEGER, name TEXT, 
+                            text TEXT, rating INTEGER, time INTEGER)
                             ''')
             db.commit()
         except Exception as e:
@@ -34,7 +34,8 @@ class MessagesRepo:
             'id': row[0],
             'name': row[1],
             'text': row[2],
-            'time': row[3]
+            'rating': row[3],
+            'time': row[4]
         }
 
     def get_all(self, after_id=0):
@@ -59,7 +60,7 @@ class MessagesRepo:
 
         return {'results': all}
 
-    def create(self, post_id, name, text):
+    def create(self, post_id, name, text, rating):
         """Persist a message to the database"""
 
         message = None
@@ -70,12 +71,13 @@ class MessagesRepo:
 
             now = int(time.time() * 1000)
             cursor.execute('''INSERT INTO messages
-                  VALUES(?,?,?,?)''', (post_id, name, text, now))
+                  VALUES(?,?,?,?,?)''', (post_id, name, text, rating, now))
 
             message = self._row_to_status_dict([
-                cursor.lastrowid,
+                post_id,
                 name,
                 text,
+                rating,
                 now
             ])
 

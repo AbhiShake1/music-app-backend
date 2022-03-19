@@ -24,7 +24,8 @@ def post_detail(request: HttpRequest) -> HttpResponse:
         post_id = post_data['post_id']
         comment = post_data['comment']
         username = post_data['username']
-        message = repo.create(post_id, username, comment)
+        rating = post_data['rating']
+        message = repo.create(post_id, username, comment, int(rating))
         pusher_client.trigger(post_id, 'feedback', message)
         data = {'post_id': post_id,
                 'comment': comment,
