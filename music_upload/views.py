@@ -16,3 +16,9 @@ def upload_music(request: HttpRequest) -> HttpResponse:
         file = fss.save(os.path.join(settings.MUSIC_ROOT, upload.name), upload)
         return HttpResponse(fss.url(file))
     return HttpResponse(status=401)
+
+
+@csrf_exempt
+def get_music(request: HttpRequest) -> HttpResponse:
+    files = os.listdir(settings.MUSIC_ROOT)
+    return HttpResponse(files)
