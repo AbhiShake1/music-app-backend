@@ -18,4 +18,4 @@ class Music(Model):
     title = CharField(max_length=60)
     description = TextField()
     artist = CharField(max_length=60)
-    file = FileField(validators=[validate_file_extension], upload_to=os.path.join(settings.MUSIC_ROOT, title))
+    file = FileField(validators=[validate_file_extension], upload_to=os.path.join(settings.MUSIC_ROOT, str(title)))
