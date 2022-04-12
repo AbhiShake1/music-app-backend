@@ -8,6 +8,6 @@ def get_notifications(request):
     notifications = Notification.objects.all()
     result = []
     for notification in notifications:
-        result.append({str(notification.title): notification.description})
+        result.append({'title': notification.title, 'description': notification.description})
     import json
     return HttpResponse(json.dumps(result, default=str))

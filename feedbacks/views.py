@@ -20,13 +20,13 @@ def post_detail(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         import json
         post_data: dict = json.loads(request.body.decode())
-        comment = post_data['comment']
+        issues = post_data['issues']
         username = User.objects.get(username=post_data['username'])
-        rating = post_data['rating']
-        message = Feedback.objects.create(username=username, comment=comment, rating=int(rating))
+        description = post_data['description']
+        message = Feedback.objects.create(username=username, issues=issues, description=description)
         data = {
             'post_id': message.id,
-            'comment': comment,
+            'issues': issues,
         }
         return HttpResponse(json.dumps(data), headers={
             "Access-Control-Allow-Origin": "*",
