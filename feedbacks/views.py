@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from feedbacks.models import Post
+from feedbacks.models import Feedback
 
 pusher_client = pusher.Pusher(
     app_id='1363891',
@@ -23,7 +23,7 @@ def post_detail(request: HttpRequest) -> HttpResponse:
         comment = post_data['comment']
         username = User.objects.get(username=post_data['username'])
         rating = post_data['rating']
-        message = Post.objects.create(username=username, comment=comment, rating=int(rating))
+        message = Feedback.objects.create(username=username, comment=comment, rating=int(rating))
         data = {
             'post_id': message.id,
             'comment': comment,
@@ -34,7 +34,7 @@ def post_detail(request: HttpRequest) -> HttpResponse:
         })
     if request.method == 'GET':
         import json
-        messages = Post.objects.all()
+        messages = Feedback.objects.all()
         result: dict = {}
         for message in messages:
             key = str(message.username)

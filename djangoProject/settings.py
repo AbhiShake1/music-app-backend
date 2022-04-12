@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'signout',
     'music_upload',
     'request_music',
+    'notifications',
 ]
 
 MIDDLEWARE = [

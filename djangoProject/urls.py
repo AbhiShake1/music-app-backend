@@ -11,4 +11,5 @@ urlpatterns = [
     path('api=feedback/', include('feedbacks.urls')),
     path('api=music_upload/', include('music_upload.urls')),
     path('api=request_music/', include('request_music.urls')),
+    path('api=notifications/', include('notifications.urls')),
 ]

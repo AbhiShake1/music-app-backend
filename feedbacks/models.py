@@ -4,7 +4,8 @@ from django.db.models import *
 
 
 # Create your models here.
-class Post(Model):
+class Feedback(Model):
     username = ForeignKey(User, on_delete=CASCADE)
-    comment = TextField()
-    rating = PositiveIntegerField(validators=[MaxValueValidator(5, message='Rating cannot go beyond 5')])
+    issues = TextField()
+    description = TextField()
+    screenshot = FileField()
