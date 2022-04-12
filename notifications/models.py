@@ -5,3 +5,6 @@ from django.db.models import *
 class Notification(Model):
     title = CharField(max_length=100)
     description = TextField()
+
+    def __str__(self):
+        return str(self.title)
