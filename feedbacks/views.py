@@ -1,17 +1,8 @@
-import pusher
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from feedbacks.models import Feedback
-
-pusher_client = pusher.Pusher(
-    app_id='1363891',
-    key='6c72a292bcf1d2ca2eb6',
-    secret='079a81394ef64fb65c14',
-    cluster='ap2',
-    ssl=True
-)
 
 
 # Create your views here.
