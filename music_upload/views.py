@@ -12,13 +12,15 @@ from music_upload.models import Music
 def upload_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES['music']:
         import json
-        post_data = json.loads(request.body.decode())
+        post_data = request.POST
         title = post_data['title']
-        description = post_data['description']
         artist = post_data['artist']
         file = request.FILES['music']
-        music = Music.objects.create(title=title, description=description, artist=artist, file=file)
-        return HttpResponse(music.title)
+        music = Music.objects.create(title=title, artist=artist, file=file)
+        return HttpResponse(json.dumps({
+            'title': music.title,
+            'content': textract.process(music.file, method='PDFminer')
+        }))
     return HttpResponse(status=401)
 
 

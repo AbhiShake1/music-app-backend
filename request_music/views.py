@@ -8,7 +8,7 @@ def request_music(request):
     if request.method == 'POST':
         import json
         post_data = json.loads(request.body.decode())
-        artist = post_data['artis']
+        artist = post_data['artist']
         song_name = post_data['song_name']
         RequestedMusic.objects.create(artist=artist, song_name=song_name)
         return HttpResponse('Successful')
