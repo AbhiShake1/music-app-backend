@@ -1,9 +1,11 @@
 # Create your views here.
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from request_music.models import RequestedMusic
 
 
+@csrf_exempt
 def request_music(request):
     if request.method == 'POST':
         import json
