@@ -1,8 +1,7 @@
 from typing import Optional
 
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpRequest, Http404
-
+from django.http import HttpResponse, HttpRequest
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
@@ -11,10 +10,6 @@ from core.user_detail_response import get_user_detail_response
 
 @csrf_exempt
 def create_user(request: HttpRequest) -> Optional[HttpResponse]:
-    def data_or_empty(data) -> str:
-        if data is None:
-            return ''
-
     if request.method == 'POST':
         import json
         post_data: dict = json.loads(request.body.decode())
@@ -24,10 +19,9 @@ def create_user(request: HttpRequest) -> Optional[HttpResponse]:
             password = post_data['password']
             first_name = post_data.get('firstName')
             last_name = post_data.get('lastName')
-            user: User = User.objects.create_user(username=username, email=email, password=password)
-            user.first_name = data_or_empty(first_name)
-            user.last_name = data_or_empty(last_name)
-            user.save()
+            user: User = User.objects.create_user(username=username, email=email, password=password,
+                                                  first_name=first_name or 'Unset',
+                                                  last_name=last_name or 'Unset')
             return get_user_detail_response(user)
         except Exception:
             return HttpResponse(content='User already exists', status=401)
