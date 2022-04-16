@@ -15,6 +15,6 @@ def validate_file_extension(value):
 
 # Create your models here.
 class Music(Model):
-    title = CharField(max_length=60)
+    title = CharField(max_length=60, primary_key=True)
     artist = CharField(max_length=60)
-    file = FileField(validators=[validate_file_extension], upload_to=os.path.join(settings.MUSIC_ROOT, str(title)))
+    file = FileField(validators=[validate_file_extension], upload_to=settings.MUSIC_ROOT)

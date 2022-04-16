@@ -1,7 +1,7 @@
 import os.path
 
-import textract
 from django.conf import settings
+from django.core.exceptions import MultipleObjectsReturned
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
 
@@ -19,27 +19,28 @@ def upload_music(request: HttpRequest) -> HttpResponse:
         music = Music.objects.create(title=title, artist=artist, file=file)
         return HttpResponse(json.dumps({
             'title': music.title,
-            'content': textract.process(music.file, method='PDFminer')
+            'artist': music.artist,
         }))
     return HttpResponse(status=401)
 
 
 @csrf_exempt
 def get_music(request: HttpRequest) -> HttpResponse:
-    def get_content(file):
-        return textract.process(file, method='PDFminer')
+    if request.method == 'POST':
+        import json
+        requested_music = json.loads(request.body.decode())['title']
+        try:
+            music = Music.objects.get(title=requested_music)
+        except MultipleObjectsReturned:
+            music = Music.objects.get(title=requested_music)[0]
+        except:
+            return HttpResponse('The requested music does not exist', status=404)
+        filename = music.file.url.split('/')[-1]
+        response = HttpResponse(music.file, content_type='text/plain')
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
 
-    musics = Music.objects.all()
-    result: dict = {}
-    for music in musics:
-        key = str(music.artist)
-        detail = {'title': music.title, 'description': music.description, 'content': get_content(music.file.path)}
-        if key in result:
-            result[key] += detail
-        else:
-            result[key] = detail
-    import json
-    return HttpResponse(json.dumps(result))
+        return response
+    return HttpResponse(status=401)
 
 
 @csrf_exempt
