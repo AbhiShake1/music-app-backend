@@ -16,7 +16,10 @@ def upload_music(request: HttpRequest) -> HttpResponse:
         title = post_data['title']
         artist = post_data['artist']
         file = request.FILES['music']
-        music = Music.objects.create(title=title, artist=artist, file=file)
+        try:
+            music = Music.objects.create(title=title, artist=artist, file=file)
+        except:
+            return HttpResponse('This song already exists', status=403)
         return HttpResponse(json.dumps({
             'title': music.title,
             'artist': music.artist,
@@ -44,14 +47,27 @@ def get_music(request: HttpRequest) -> HttpResponse:
 
 
 @csrf_exempt
+def get_all_music(request):
+    result = []
+    music = Music.objects.all()
+    for m in music:
+        result.append({
+            'title': m.title,
+            'artist': m.artist,
+        })
+    import json
+    return HttpResponse(json.dumps(result))
+
+
+@csrf_exempt
 def delete_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'DELETE':
         import json
         post_data: dict = json.loads(request.body.decode())
-        file_name = os.path.join(settings.MUSIC_ROOT, post_data['file_name'])
+        file_name = os.path.join(settings.MUSIC_ROOT, post_data['title'])
         if os.path.exists(file_name):
             os.remove(file_name)
-            Music.objects.get(artist=post_data[file_name]).delete()
+        Music.objects.get(title=post_data['title']).delete()
         files = os.listdir(settings.MUSIC_ROOT)
         return HttpResponse(json.dumps(files))
     return HttpResponse(status=401)
