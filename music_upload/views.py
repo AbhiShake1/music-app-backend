@@ -55,6 +55,7 @@ def get_all_music(request):
         result.append({
             'title': m.title,
             'artist': m.artist,
+            'filename': m.file.name
         })
     import json
     return HttpResponse(json.dumps(result))
