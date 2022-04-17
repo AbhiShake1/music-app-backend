@@ -133,4 +133,4 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 MUSIC_URL = '/music/'
-MUSIC_ROOT = os.path.join(BASE_DIR, 'music')
+MUSIC_ROOT = '/mnt/data'
