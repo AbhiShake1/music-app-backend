@@ -34,16 +34,16 @@ def get_music(request: HttpRequest) -> HttpResponse:
         import json
         requested_music = json.loads(request.body.decode())['title']
         try:
-            music = Music.objects.get(title=requested_music)
+            m = Music.objects.get(title=requested_music)
         except MultipleObjectsReturned:
-            music = Music.objects.get(title=requested_music)[0]
+            m = Music.objects.get(title=requested_music)[0]
         except:
             return HttpResponse('The requested music does not exist', status=404)
-        filename = music.file.url.split('/')[-1]
-        response = HttpResponse(music.file, content_type='text/plain')
-        response['Content-Disposition'] = 'attachment; filename=%s' % filename
-
-        return response
+        return HttpResponse(json.dumps({
+            'title': m.title,
+            'artist': m.artist,
+            'url': m.file.url
+        }))
     return HttpResponse(status=401)
 
 
@@ -55,7 +55,7 @@ def get_all_music(request):
         result.append({
             'title': m.title,
             'artist': m.artist,
-            'filename': m.file.name
+            'url': m.file.url
         })
     import json
     return HttpResponse(json.dumps(result))
