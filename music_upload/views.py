@@ -23,7 +23,7 @@ def upload_music(request: HttpRequest) -> HttpResponse:
         return HttpResponse(json.dumps({
             'title': music.title,
             'artist': music.artist,
-            'filename': music.file.name,
+            'url': music.file.url,
         }))
     return HttpResponse(status=401)
 

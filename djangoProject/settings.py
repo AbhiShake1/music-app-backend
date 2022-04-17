@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'music_upload',
     'request_music',
     'notifications',
+    'gdstorage',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,4 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MUSIC_URL = '/music/'
 MUSIC_ROOT = os.path.join(BASE_DIR, 'music')
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'fyp-music-app-eva-a9d5713b2620.json'

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fyp-music-app-eva",
+  "private_key_id": "a9d5713b2620a2bbe3a764a0684ddf2f01027f86",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCpMWdznqlfU7La\nK6zV2XPrwJOiNXgDzpK7TwxeQG1HK4OyAg7G1u3zT66AMyEL8rhUFrQ5v2yUMbhY\nyP4FiYZShvricO0VgODx2kenNdOTDXWjrzh08dB2EfZnZwvB+QszgFkKqXVjT9cR\nSFpM4DFpS4cVeIKUg523ijrAM9COyRyCd6Ve9tzUewAR8qCu4GNTNnxVHMv8z6y6\nyXUJ6ZvIOil1ENObrB4yAiVosjha/Rp0mBfmYbaL3QdgHhhvvti38Z/yKJoxXmfw\n6mF3jT5NITmXMDIV0L7swpzEXxk2gWBrtHUSR14arwPWQ+QpnXq4golHlytbbfc2\nIRV/XHM3AgMBAAECggEAUfvfCa71mnwXu9ETCHK80Z14zE6Fb67O+hV1REyKx0RG\nJeEKYP5vwgk34OYlmsEL4a84uIzR48Nt9RO7x1oa7O18L3KR52wSVA81zkfuVCDf\nAqhavowYO8Y7dGKB14XCkDueqeRwPeXHrJe3Le4q8z9GXziMacOXDoNcMZtJ8Y2n\nXODzXwI2pUiORHg6lpSRKPFL4Syj3ic/xRTtdL5vMoEgRKtFaOgT+qEA1jvl4zuA\nmFZs/3kaX4Fui8JF+Yq2jJ2X+Am3VGsw77PpawaeIrzObqLElZNK33V2eSHJMcWE\nPh03TjUm1xhBEzZ/rimeUcZEvwXK6uymNl6f3irZKQKBgQDS+M7FLk7nMysaoVOY\nPOzq/FwaKsgM/sZ0u8Nzj3Qykj9hwRwuafun0K9Lii/a9/PVtWw+BnxlFRuURCYC\ntmD4mx1I60jnOf7pb4q2Dlr95RG6MLv3GgdHKrj48ZO/t4Hx1Mnp336tsP3XhC7C\nbV4pyz/scWUt/b6jeAky7buvWQKBgQDNTdutIkYjTTsNoSmhlHTVIA97HY28QdXB\neL11Gc3VEGUgjHRqu1hJ09bT3I9+6K2SebsQ8Ds0enxQroeeg7Np4eAubtLGFzs1\nCxAJ5f5fG/laDneGlYWUYsMRRYBIpb0n0mzjYtNrGn4fkV8dmDPhmbxmMc/mWFTj\nzXe0SlX1DwKBgC+MunXAuTHs23M2FzRBzxgrZsrTB6G+LpaS1zuNgp//TF/I+YQQ\niRLKuyeobp7IseFh8ZKNPa4+sqeZMIP9/R8rPs93kEflT2nnpPjhhWqiHXu8jjDk\nYe2NWIFrWWSlhJkv345hvBiDwsK3XR6fLdD3qWGuMSLLhRMs883RvTKJAoGBAMfs\n5du34K1H7BXdt3jN5OgWjHzLztZhFhONzJFYS4UMri4AGO5G+jcKv80Yn/RqCXz2\nZiCckEsObDj1fMP0ZKbbe0A8U6zrupBw8XFyMz/TMgNsyyCYQri5ZFRRZhdYrtc0\npyzXdCJ8bg23tvRO31b2Ku0p3NbndeNQlx1Otl4pAoGAW1/CR20q0bMnyR1jxAF5\nleEcdfVqtqvO3RS+6ZShGX6JOwqt8BpIklRzfCltHdLsYsds4QZu138dU50jPlYK\ne29Omtupd9fwcoJ8SAVVU5LOWxEnwhOqo2x5qdaQ4lLGxgGDQkpOz/KX0HehmWls\nYaYV6lMKZ9kLU+OS2FGDxSw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "music-app-eva@fyp-music-app-eva.iam.gserviceaccount.com",
+  "client_id": "104358842941267833272",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/music-app-eva%40fyp-music-app-eva.iam.gserviceaccount.com"
+}
