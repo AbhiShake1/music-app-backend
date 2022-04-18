@@ -12,7 +12,7 @@ from music_upload.models import Music
 def upload_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES['music']:
         import json
-        post_data = request.POST
+        post_data = json.loads(request.body.decode())
         try:
             title = post_data['title']
         except:
