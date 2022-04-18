@@ -1,15 +1,18 @@
+import os.path
+
+from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.views import APIView
 
 from music_upload.models import Music
 
 
-class UploadMusic(APIView):
-    def post(self, request):
+@csrf_exempt
+def upload_music(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST' and request.FILES['music']:
         import json
-        post_data = json.loads(request.data)
+        post_data = json.loads(request.body.decode())
         try:
             title = post_data['title']
         except:
@@ -31,6 +34,7 @@ class UploadMusic(APIView):
             'artist': music.artist,
             'url': music.file.url,
         }))
+    return HttpResponse(status=401)
 
 
 @csrf_exempt

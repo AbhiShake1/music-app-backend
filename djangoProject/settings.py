@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'musicapp.apps.MusicappConfig',
-    'rest_framework',
     'create_user',
     'signin',
     'forgot_password',

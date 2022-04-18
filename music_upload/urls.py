@@ -6,7 +6,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.UploadMusic.as_view()),
+    path('', views.upload_music),
     path('get/', views.get_music),
     path('delete/', views.delete_music),
     path('get_all/', views.get_all_music),
