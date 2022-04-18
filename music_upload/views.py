@@ -1,3 +1,6 @@
+import os.path
+
+from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
@@ -8,23 +11,29 @@ from music_upload.models import Music
 @csrf_exempt
 def upload_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES['music']:
+        import json
+        post_data = request.POST
         try:
-            import json
-            post_data = json.loads(request.body.decode())
             title = post_data['title']
+        except:
+            return HttpResponse('title not found', status=404)
+        try:
             artist = post_data['artist']
+        except:
+            return HttpResponse('artist not found', status=404)
+        try:
             file = request.FILES['music']
-            try:
-                music = Music.objects.create(title=title, artist=artist, file=file)
-            except:
-                return HttpResponse('This song already exists', status=403)
-            return HttpResponse(json.dumps({
-                'title': music.title,
-                'artist': music.artist,
-                'url': music.file.url,
-            }))
-        except Exception as e:
-            return HttpResponse(str(e), status=500)
+        except:
+            return HttpResponse('music not found', status=404)
+        try:
+            music = Music.objects.create(title=title, artist=artist, file=file)
+        except:
+            return HttpResponse('This song already exists', status=403)
+        return HttpResponse(json.dumps({
+            'title': music.title,
+            'artist': music.artist,
+            'url': music.file.url,
+        }))
     return HttpResponse(status=401)
 
 
