@@ -13,18 +13,9 @@ def upload_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES['music']:
         import json
         post_data = request.POST
-        try:
-            title = post_data['title']
-        except:
-            return HttpResponse('title not found', status=404)
-        try:
-            artist = post_data['artist']
-        except:
-            return HttpResponse('artist not found', status=404)
-        try:
-            file = request.FILES['music']
-        except:
-            return HttpResponse('music not found', status=404)
+        title = post_data['title']
+        artist = post_data['artist']
+        file = request.FILES['music']
         try:
             music = Music.objects.create(title=title, artist=artist, file=file)
         except:
@@ -58,14 +49,17 @@ def get_music(request: HttpRequest) -> HttpResponse:
 
 @csrf_exempt
 def get_all_music(request):
-    result = []
+    result: dict = {}
     music = Music.objects.all()
     for m in music:
-        result.append({
+        mdata = {
             'title': m.title,
-            'artist': m.artist,
             'url': m.file.url
-        })
+        }
+        if m.artist in result:
+            result[str(m.artist)].append(mdata)
+        else:
+            result[str(m.artist)] = [mdata]
     import json
     return HttpResponse(json.dumps(result))
 

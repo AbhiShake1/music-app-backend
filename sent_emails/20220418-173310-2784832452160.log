@@ -1,0 +1,20 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password recovery on 127.0.0.1:8000
+From: webmaster@localhost
+To: abhi9848038283@gmail.com
+Date: Mon, 18 Apr 2022 11:48:10 -0000
+Message-ID: 
+ <165028249096.13212.2395437107257351883@LAPTOP-0A6ASIGK.mshome.net>
+
+Dear Abhi,
+
+You -- or someone pretending to be you -- has requested a password reset on 127.0.0.1:8000.
+
+You can set your new password by following this link:
+
+http://127.0.0.1:8000/api=forgot_password/reset/Mw:1ngPrW:IT_T9Sfet0HNGZiwhC2YmM8LzGqGl1oC-TApXsaiAVc/
+
+If you don't want to reset your password, simply ignore this email and it will stay unchanged.
+-------------------------------------------------------------------------------

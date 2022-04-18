@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     'musicapp.apps.MusicappConfig',
     'create_user',
     'signin',
-    'forgot_password',
     'feedbacks',
     'signout',
     'music_upload',
     'request_music',
     'notifications',
     'gdstorage',
+    'password_reset',
 ]
 
 MIDDLEWARE = [
