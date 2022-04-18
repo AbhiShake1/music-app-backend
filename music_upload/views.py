@@ -10,7 +10,7 @@ def upload_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES['music']:
         try:
             import json
-            post_data = request.POST
+            post_data = json.loads(request.body.decode())
             title = post_data['title']
             artist = post_data['artist']
             file = request.FILES['music']
