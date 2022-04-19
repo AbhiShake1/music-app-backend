@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites.shortcuts import get_current_site
 from django.core import signing
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
@@ -13,7 +13,6 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.decorators.debug import sensitive_post_parameters
-
 
 from .forms import PasswordRecoveryForm, PasswordResetForm
 from .signals import user_recovers_password
@@ -89,16 +88,14 @@ class Recover(SaltMixin, generic.FormView):
         }
         body = loader.render_to_string(self.email_template_name,
                                        context).strip()
-        subject = loader.render_to_string(self.email_subject_template_name,
-                                          context).strip()
-        EmailMessage(subject,  body, to=[self.user.email]).send()
+        send_mail('Password recovery for music app', body, 'coronaisoverrated@gmail.com', [self.user.email])
 
     def form_valid(self, form):
         self.user = form.cleaned_data['user']
         self.send_notification()
         if (
-            len(self.search_fields) == 1 and
-            self.search_fields[0] == 'username'
+                len(self.search_fields) == 1 and
+                self.search_fields[0] == 'username'
         ):
             # if we only search by username, don't disclose the user email
             # since it may now be public information.
