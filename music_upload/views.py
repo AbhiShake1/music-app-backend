@@ -1,11 +1,9 @@
-import os.path
-
-from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
 
 from music_upload.models import Music
+from notifications.models import Notification
 
 
 @csrf_exempt
@@ -18,6 +16,7 @@ def upload_music(request: HttpRequest) -> HttpResponse:
         file = request.FILES['music']
         try:
             music = Music.objects.create(title=title, artist=artist, file=file)
+            Notification.objects.create(title='New Music Added', description=f'{title} by {artist}')
         except:
             return HttpResponse('This song already exists', status=403)
         return HttpResponse(json.dumps({
@@ -69,6 +68,8 @@ def delete_music(request: HttpRequest) -> HttpResponse:
     if request.method == 'DELETE':
         import json
         post_data: dict = json.loads(request.body.decode())
-        Music.objects.get(title=post_data['title']).delete()
+        title = post_data['title']
+        Music.objects.get(title=title).delete()
+        Notification.objects.get(title='Music Deleted', description=title)
         return HttpResponse('deleted')
     return HttpResponse(status=401)
